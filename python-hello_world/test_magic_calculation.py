@@ -1,5 +1,3 @@
-# test_magic_calculation.py
-
 from magic_calculation_102 import magic_calculation
 
 # Test cases
