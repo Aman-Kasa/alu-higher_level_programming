@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Check if PYFILE environment variable is set
+if [ -z "$PYFILE" ]; then
+  echo "PYFILE environment variable is not set"
+  exit 1
+fi
+
+# Extract the filename and the directory
+FILE_NAME=$(basename "$PYFILE")
+DIR_NAME=$(dirname "$PYFILE")
+
+# Compile the Python file
+python3 -m compileall -q "$DIR_NAME" || exit 1
+
+# Rename the compiled file to have .pyc extension
+PYC_FILE="${FILE_NAME}c"
+COMPILED_FILE="$DIR_NAME/__pycache__/${FILE_NAME%.*}.cpython-*.pyc"
+
+# Move the compiled .pyc file to the desired location
+mv $COMPILED_FILE "$DIR_NAME/$PYC_FILE" || exit 1
+
+echo "Compiling $PYFILE ..."
