@@ -29,4 +29,4 @@ def calculator():
     print(f"{a} {operator} {b} = {result}")
 
 if __name__ == "__main__":
-    calculator()
+  calculator()  
