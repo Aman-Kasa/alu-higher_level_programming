@@ -16,11 +16,8 @@ if __name__ == "__main__":
         next_op_index = (operations.index(op) + 1) % len(operations)
         next_next_op_index = (operations.index(op) + 2) % len(operations)
 
-        output = (
-            f"a = {a} and b = {b} FAKE : "
-            f"- {op['op']} -> {operations[next_op_index]['op']} "
-            f"- {operations[next_op_index]['op']} -> {op['op']} "
-            f"- {op['op']} -> {operations[next_next_op_index]['op']} "
-            f"- {operations[next_next_op_index]['op']} -> {op['op']}"
-        )
-        print(output)
+        print(f"a = {a} and b = {b} FAKE : "
+              f"- {op['op']} -> {operations[next_op_index]['op']} "
+              f"- {operations[next_op_index]['op']} -> {op['op']} "
+              f"- {op['op']} -> {operations[next_next_op_index]['op']} "
+              f"- {operations[next_next_op_index]['op']} -> {op['op']}")
