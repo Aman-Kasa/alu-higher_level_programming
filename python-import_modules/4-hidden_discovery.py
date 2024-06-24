@@ -1,36 +1,31 @@
 #!/usr/bin/python3
 
+import marshal
 import dis
-import sys
-import types
 
-# Load the bytecode from the downloaded file
-with open('hidden_4.pyc', 'rb') as file:
-    bytecode = file.read()
 
-# Define a function to collect names from bytecode
-def collect_names(code):
+def load_module(file_path):
+    with open(file_path, 'rb') as file:
+        file.seek(16)  # Skip the header
+        code = marshal.load(file)
+    return code
+
+
+def get_names_from_code(code):
     names = set()
-    instructions = dis.get_instructions(code)
-    for instr in instructions:
-        if instr.starts_line and instr.opname == 'LOAD_NAME' and not instr.argval.startswith('__'):
+    for instr in dis.get_instructions(code):
+        if instr.opname == 'LOAD_GLOBAL' and not instr.argval.startswith('__'):
             names.add(instr.argval)
     return names
 
-# Create a dummy module to execute the bytecode
-module = types.ModuleType('hidden_module')
-code = module.__loader__.code_from_bytes(bytecode)
-exec(code, module.__dict__)
 
-# Get names from the module's namespace
-module_names = [name for name in module.__dict__ if not name.startswith('__')]
+def main():
+    code = load_module('hidden_4.pyc')
+    names = get_names_from_code(code)
+    sorted_names = sorted(names)
+    for name in sorted_names:
+        print(name)
 
-# Get names from bytecode
-bytecode_names = collect_names(code)
 
-# Combine and sort names
-all_names = sorted(module_names + list(bytecode_names))
-
-# Print each name on a new line
-for name in all_names:
-    print(name)
+if __name__ == "__main__":
+    main()
