@@ -2,6 +2,7 @@
 
 import sys
 
+
 def main():
     # Get all arguments from sys.argv excluding the script name
     arguments = sys.argv[1:]
@@ -15,6 +16,7 @@ def main():
     
     # Print the result
     print(total_sum)
+
 
 if __name__ == "__main__":
     main()
