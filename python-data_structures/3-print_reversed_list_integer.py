@@ -4,13 +4,13 @@
 def print_reversed_list_integer(my_list=None):
     if my_list is None:
         return
-    
     if not isinstance(my_list, list):
         return
-    
     for i in range(len(my_list) - 1, -1, -1):
         if isinstance(my_list[i], int):
             print("{:d}".format(my_list[i]))
+        else:
+            raise TypeError("List contains non-integer values")
 
 
 # Test case as per the provided example
@@ -34,4 +34,7 @@ if __name__ == "__main__":
     print_reversed_list_integer(list4)
 
     print("\nCorrect output - case: list =", list5)
-    print_reversed_list_integer(list5)
+    try:
+        print_reversed_list_integer(list5)
+    except TypeError as e:
+        print(e)
