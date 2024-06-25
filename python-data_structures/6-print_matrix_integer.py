@@ -11,7 +11,8 @@ def print_matrix_integer(matrix=[[]]):
                     print("{:d}".format(row[i]))
         else:
             print()  # Print an empty line for empty rows
-    if matrix:
+
+    if matrix and matrix[-1]:
         print("--")
 
 
