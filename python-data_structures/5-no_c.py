@@ -4,14 +4,12 @@
 def no_c(my_string):
     # Initialize an empty list to collect characters that are not 'c' or 'C'
     result = []
-    
     # Iterate through each character in the input string
     for char in my_string:
         # Check if the character is not 'c' or 'C', then append to result list
         if char != 'c' and char != 'C':
             result.append(char)
-    
-    # Join the characters in the result list into a new string
+        # Join the characters in the result list into a new string
     return ''.join(result)
 
 
