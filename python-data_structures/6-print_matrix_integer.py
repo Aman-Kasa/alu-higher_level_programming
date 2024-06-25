@@ -3,23 +3,29 @@
 
 def print_matrix_integer(matrix=[[]]):
     for row in matrix:
-        for i in range(len(row)):
-            if i < len(row) - 1:
-                print("{:d}".format(row[i]), end=" ")
-            else:
-                print("{:d}".format(row[i]))
-    # Print a newline after each row except for the last row
+        if row:  # Check if the row is not empty
+            for i in range(len(row)):
+                if i < len(row) - 1:
+                    print("{:d}".format(row[i]), end=" ")
+                else:
+                    print("{:d}".format(row[i]))
+        else:
+            print()  # Print an empty line for empty rows
     if matrix:
         print("--")
 
 
-# Test cases as per the provided examples
 if __name__ == "__main__":
-    matrix = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]
-    ]
+    matrix0 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    matrix1 = [[1, 2], [4, 5]]
+    matrix2 = [[1, 2], [4, 5], [7, 8]]
+    matrix3 = [[1]]
+    matrix4 = [[1], [2], [3], [4]]
+    matrix5 = [[]]
 
-    print_matrix_integer(matrix)
-    print_matrix_integer()
+    print_matrix_integer(matrix0)
+    print_matrix_integer(matrix1)
+    print_matrix_integer(matrix2)
+    print_matrix_integer(matrix3)
+    print_matrix_integer(matrix4)
+    print_matrix_integer(matrix5)
