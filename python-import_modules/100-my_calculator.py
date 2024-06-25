@@ -1,45 +1,46 @@
 #!/usr/bin/python3
+
 import sys
-from calculator_1 import add
-from calculator_1 import sub
-from calculator_1 import mul
-from calculator_1 import div
 
 
-def calculator():
+def main():
     if len(sys.argv) != 4:
-        print("Usage: ./100-my_calculator.py <a> <operator> <b>")
+        print("Incorrect number of arguments. Usage: <num1> <operator> <num2>")
         sys.exit(1)
 
     try:
-        a = int(sys.argv[1])
-        operator = sys.argv[2]
-        b = int(sys.argv[3])
+        num1 = float(sys.argv[1])
     except ValueError:
-        print("Error: Invalid input. <a> and <b> must be integers.")
+        print(f"Invalid number: {sys.argv[1]}")
         sys.exit(1)
 
-    if operator not in ['+', '-', '*', '/']:
-        print("Unknown operator. Available operators: +, -, * and /")
+    operator = sys.argv[2]
+    valid_operators = ['+', '-', '*', '/']
+
+    if operator not in valid_operators:
+        print(f"Invalid operator: {operator}")
         sys.exit(1)
 
     try:
-        if operator == '+':
-            result = add(a, b)
-        elif operator == '-':
-            result = sub(a, b)
-        elif operator == '*':
-            result = mul(a, b)
-        elif operator == '/':
-            if b == 0:
-                print("Error: division by zero")
-                sys.exit(1)
-            result = div(a, b)
-        print(f"{a} {operator} {b} = {result}")
-    except Exception as e:
-        print(f"Error: {e}")
+        num2 = float(sys.argv[3])
+    except ValueError:
+        print(f"Invalid number: {sys.argv[3]}")
         sys.exit(1)
+
+    if operator == '+':
+        result = num1 + num2
+    elif operator == '-':
+        result = num1 - num2
+    elif operator == '*':
+        result = num1 * num2
+    elif operator == '/':
+        if num2 == 0:
+            print("Division by zero is not allowed")
+            sys.exit(1)
+        result = num1 / num2
+
+    print(f"The result of {num1} {operator} {num2} is: {result}")
 
 
 if __name__ == "__main__":
-    calculator()
+    main()
