@@ -2,7 +2,8 @@
 import sys
 from calculator_1 import add, sub, mul, div
 
-if __name__ == "__main__":
+
+def calculator():
     if len(sys.argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
@@ -18,9 +19,17 @@ if __name__ == "__main__":
     elif operator == '*':
         result = mul(a, b)
     elif operator == '/':
-        result = div(a, b)
+        try:
+            result = div(a, b)
+        except ValueError as e:
+            print(str(e))
+            sys.exit(1)
     else:
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
 
     print(f"{a} {operator} {b} = {result}")
+
+
+if __name__ == "__main__":
+    calculator()
