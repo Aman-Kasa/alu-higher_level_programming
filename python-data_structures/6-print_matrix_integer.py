@@ -16,16 +16,14 @@ def print_matrix_integer(matrix=[[]]):
 
 
 if __name__ == "__main__":
-    matrix0 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    matrix1 = [[1, 2], [4, 5]]
-    matrix2 = [[1, 2], [4, 5], [7, 8]]
-    matrix3 = [[1]]
-    matrix4 = [[1], [2], [3], [4]]
-    matrix5 = [[]]
+    matrix_cases = [
+        [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+        [[1, 2], [4, 5]],
+        [[1, 2], [4, 5], [7, 8]],
+        [[1]],
+        [[1], [2], [3], [4]],
+        [[]]
+    ]
 
-    print_matrix_integer(matrix0)
-    print_matrix_integer(matrix1)
-    print_matrix_integer(matrix2)
-    print_matrix_integer(matrix3)
-    print_matrix_integer(matrix4)
-    print_matrix_integer(matrix5)
+    for matrix in matrix_cases:
+        print_matrix_integer(matrix)
