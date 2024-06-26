@@ -7,7 +7,7 @@ def uniq_add(my_list=[]):
     for num in my_list:
         if num not in seen_numbers:
             unique_sum += num
-            seen_numbers.add(num) 
+            seen_numbers.add(num)
     return unique_sum
 
 
