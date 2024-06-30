@@ -2,7 +2,7 @@
 """
 6-square module
 
-This module defines a Square class with private size and position 
+This module defines a Square class with private size and posit
 area method, and a method to print the square pattern.
 
 """
