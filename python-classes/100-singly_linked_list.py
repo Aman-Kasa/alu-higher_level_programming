@@ -6,6 +6,7 @@ This module defines classes Node and SinglyLinkedList to implemen
 
 """
 
+
 class Node:
     """
     Node class for a singly linked list.
@@ -107,8 +108,7 @@ class SinglyLinkedList:
         Returns a string representation of the linked list.
 
         Returns:
-            str: String representation of the linked list, each node data 
-
+            str: String representation of the linked list, each node
         """
         result = []
         current = self.head
@@ -126,31 +126,25 @@ class SinglyLinkedList:
 
         """
         new_node = Node(value)
-        
         if self.head is None:
             self.head = new_node
             return
-        
         if value < self.head.data:
             new_node.next_node = self.head
             self.head = new_node
             return
-        
         current = self.head
         while current.next_node is not None and current.next_node.data < value:
             current = current.next_node
-        
         new_node.next_node = current.next_node
         current.next_node = new_node
 
 
 if __name__ == "__main__":
     singly_linked_list = SinglyLinkedList()
-    
     # Example of inserting sorted values
     values_to_insert = [2, 5, 3, 10, 1, -4, -3, 4, 5, 12, 3]
     for value in values_to_insert:
         singly_linked_list.sorted_insert(value)
-    
     # Printing the linked list
     print(singly_linked_list)
