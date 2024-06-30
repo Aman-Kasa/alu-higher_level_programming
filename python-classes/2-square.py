@@ -2,7 +2,7 @@
 """
 2-square module
 
-This module defines a Square class with a private size attribute and size validation.
+This module defattribute and size validation.
 
 """
 
