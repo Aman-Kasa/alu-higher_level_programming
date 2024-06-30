@@ -2,7 +2,7 @@
 """
 4-square module
 
-This module defines a Square class with a private size attribute, size validation, area method,
+This module defprivate size attribute, size validation, area method,
 and getter/setter methods for size.
 
 """
@@ -12,7 +12,7 @@ class Square:
     """
     Square class
 
-    Defines a square by its size with validation, area calculation, and getter/setter for size.
+    Defines a sulation, and getter/setter for size.
 
     """
 
