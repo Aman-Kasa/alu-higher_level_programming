@@ -90,3 +90,9 @@ class Rectangle:
             return rect_1
         else:
             return rect_2
+
+    def __eq__(self, other):
+        """Check if two rectangles are equal based on their dimensions."""
+        if not isinstance(other, Rectangle):
+            return False
+        return self.width == other.width and self.height == other.height
