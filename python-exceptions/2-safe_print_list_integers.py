@@ -3,15 +3,16 @@
 
 def safe_print_list_integers(my_list=[], x=0):
     count = 0
-    for i in range(x):
-        try:
-            element = my_list[i]
+    i = 0
+    try:
+        while i < x:
             try:
-                print("{:d}".format(element), end="")
+                print("{:d}".format(my_list[i]), end="")
                 count += 1
             except (ValueError, TypeError):
-                continue
-        except IndexError:
-            break
-    print()  # For a new line after the loop
+                pass
+            i += 1
+    except IndexError:
+        raise IndexError("list index out of range")
+    print()
     return count
