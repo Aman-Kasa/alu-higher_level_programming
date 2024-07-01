@@ -4,6 +4,8 @@ Module 9-rectangle
 Defines a Rectangle class with width, height, area, perimeter,
 print_symbol, number_of_instances, bigger_or_equal, and square methods
 """
+
+
 class Rectangle:
     """
     Rectangle class with width, height, area, perimeter,
@@ -57,7 +59,7 @@ class Rectangle:
         return 2 * (self.width + self.height)
 
     def __str__(self):
-        """Return a string representation of the rectangle using print_symbol"""
+        """Return a string representation of the rectangle using print_sym"
         if self.width == 0 or self.height == 0:
             return ""
         symbol = str(self.print_symbol)
@@ -87,5 +89,5 @@ class Rectangle:
 
     @classmethod
     def square(cls, size=0):
-        """Create a new Rectangle instance with equal width and height"""
+        """ Create a new Rectangle instance with equal width and height""
         return cls(size, size)
