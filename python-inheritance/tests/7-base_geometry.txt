@@ -1,30 +1,51 @@
->>> MyList = __import__('1-my_list').MyList
+>>> BaseGeo = __import__('7-base_geometry').BaseGeometry
 
->>> new_list = MyList()
+>>> base = BaseGeo()
 
->>> new_list
-[]
+>>> base.area()
+Traceback (most recent call last):
+Exception: area() is not implemented
 
->>> new_list.print_sorted()
-[]
+>>> base.integer_validator()
+Traceback (most recent call last):
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
->>> new_list.append(4)
+>>> base.integer_validator("age")
+Traceback (most recent call last):
+TypeError: integer_validator() missing 1 required positional argument: 'value'
 
->>> new_list
-[4]
+>>> base.integer_validator("age", (4,))
+Traceback (most recent call last):
+TypeError: age must be an integer
 
->>> new_list.append(2)
+>>> base.integer_validator("my_int", 12)
 
->>> new_list
-[4, 2]
+>>> base.integer_validator("width", 89)
 
->>> new_list.append(-1)
+>>> base.integer_validator("name", "John")
+Traceback (most recent call last):
+TypeError: name must be an integer
 
->>> new_list
-[4, 2, -1]
+>>> base.integer_validator("age", 0)
+Traceback (most recent call last):
+ValueError: age must be greater than 0
 
->>> new_list.print_sorted()
-[-1, 2, 4]
+>>> base.integer_validator("distance", -4)
+Traceback (most recent call last):
+ValueError: distance must be greater than 0
 
->>> new_list
-[4, 2, -1]
+>>> base.integer_validator("age", [3])
+Traceback (most recent call last):
+TypeError: age must be an integer
+
+>>> base.integer_validator("age", True)
+Traceback (most recent call last):
+TypeError: age must be an integer
+
+>>> base.integer_validator("age", {3, 4})
+Traceback (most recent call last):
+TypeError: age must be an integer
+
+>>> base.integer_validator("age", None)
+Traceback (most recent call last):
+TypeError: age must be an integer
