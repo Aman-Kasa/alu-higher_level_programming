@@ -29,9 +29,13 @@ class Rectangle:
 
 class Square(Rectangle):
     """A class Square that inherits from Rectangle."""
-    def __init__(self, size):
-        """Initialize the Square with a size."""
-        super().__init__(size, size)
+    def __init__(self, size=None):
+        """Initialize the Square with a size (optional)."""
+        if size is not None:
+            self.integer_validator("size", size)
+            super().__init__(size, size)
+        else:
+            super().__init__(0, 0)
 
     def __str__(self):
         """Return a string representation of the Square."""
