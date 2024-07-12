@@ -5,7 +5,7 @@ bg = BaseGeometry()
 
 print(dir(bg))
 
-bg.integer_validator("myint", 12)
+bg.integer_validator("my_int", 12)
 bg.integer_validator("width", 89)
 
 try:
