@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module documentation: BaseGeometry class"""
 
+
 class BaseGeometry:
     """BaseGeometry class"""
 
