@@ -1,94 +1,81 @@
 #!/usr/bin/python3
-
 """
-Module documentation for Square class.
+Module for Square class.
 """
+from typing import Union
 
-
-class Rectangle:
-    """
-    Rectangle class for representing a rectangle.
-    """
-
-    def __init__(self, width, height):
-        """
-        Initializes a rectangle with width and height.
-        """
-        self.width = width
-        self.height = height
-
-    def area(self):
-        """
-        Computes the area of the rectangle.
-        """
-        return self.width * self.height
+Rectangle = __import__('9-rectangle').Rectangle
 
 
 class Square(Rectangle):
     """
-    Square class inherits from Rectangle, representing a square.
+    Square class, inherits from Rectangle.
     """
 
-    def __init__(self, size):
+    def __init__(self, size: Union[int, float]):
         """
-        Initializes a square with a given size.
+        Initializes the Square instance.
+
+        Args:
+            size (int): size of the square, must be a positive integer.
         """
+        self.__size = 0
         self.integer_validator("size", size)
         super().__init__(size, size)
+        self.__size = size
 
-    def __str__(self):
-        """
-        Returns a string representation of the square.
-        """
-        return f"[Square] {self.width}/{self.height}"
-
-    def integer_validator(self, name, value):
-        """
-        Validates that the value is a positive integer.
-        """
-        if not isinstance(value, int):
-            raise TypeError(f"{name} must be an integer")
-        if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
-
-    def area(self):
+    def area(self) -> int:
         """
         Computes the area of the square.
+
+        Returns:
+            int: Area of the square.
         """
-        return self.width * self.height
+        return self.__size * self.__size
 
+    @property
+    def size(self) -> int:
+        """
+        Getter for size attribute.
 
-# Test cases
-if __name__ == "__main__":
-    # Test case 1: Print dir(Square)
-    print(dir(Square))
+        Returns:
+            int: size of the square.
+        """
+        return self.__size
 
-    # Test case 2: Print issubclass(Square, Rectangle)
-    print(issubclass(Square, Rectangle))
+    @size.setter
+    def size(self, value: Union[int, float]):
+        """
+        Setter for size attribute.
 
-    # Test case 3: Create a Square instance with size 4
-    s = Square(4)
+        Args:
+            value (int): size of the square, must be a positive integer.
+        """
+        self.integer_validator("size", value)
+        self.__size = value
 
-    # Test case 4: Print area of square with size 4
-    print(s.area())
+    def integer_validator(self, name: str, value: Union[int, float]):
+        """
+        Validates the value as a positive integer.
 
-    # Test case 5: Create a Square instance with size 1340
-    s = Square(1340)
-    print(s.area())
+        Args:
+            name (str): name of the value being validated.
+            value (int): value to validate.
 
-    # Test case 6: Create a Square instance with default size (error expected)
-    try:
-        s = Square()
-    except TypeError as e:
-        print(e)
+        Raises:
+            TypeError: if value is not an integer.
+            ValueError: if value is not greater than 0.
+        """
+        if type(value) is not int:
+            raise TypeError(f"{name} must be an integer")
+        if value <= 0:
+            raise ValueError(f"{name} must be > 0")
 
-    # Test case 7: Create a Square instance with size "13" (error expected)
-    try:
-        s = Square("13")
-    except TypeError as e:
-        print(e)
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the Square.
 
-    # Test case 8: Create a Square instance with size 13
-    s = Square(13)
-    print(s.width)
-    print(s.height)
+        Returns:
+            str: [Square] <width>/<height>
+        """
+        return f"[Square] {self.__size}/{self.__size}"
