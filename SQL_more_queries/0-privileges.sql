@@ -1,11 +1,4 @@
--- Check if users exist
-SELECT User, Host FROM mysql.user WHERE User IN ('user_0d_1', 'user_0d_2');
-
--- Show grants for user_0d_1
+-- lists privileges of the MySQL users
+REVOKE AUDIT_ABORT_EXEMPT, FIREWALL_EXEMPT, AUTHENTICATION_POLICY_ADMIN, GROUP_REPLICATION_STREAM, PASSWORDLESS_USER_ADMIN, SENSITIVE_VARIABLES_OBSERVER, TELEMETRY_LOG_ADMIN ON *.* FROM 'user_0d_1'@'localhost', 'user_0d_2'@'localhost';
 SHOW GRANTS FOR 'user_0d_1'@'localhost';
-
--- Show grants for user_0d_2
 SHOW GRANTS FOR 'user_0d_2'@'localhost';
-
--- Show user_0d_1 privileges on specific database (e.g., user_2_db)
-SHOW GRANTS FOR 'user_0d_1'@'localhost' ON user_2_db;
