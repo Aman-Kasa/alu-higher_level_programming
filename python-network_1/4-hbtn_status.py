@@ -1,24 +1,13 @@
 #!/usr/bin/python3
+"""__summary__
+- Write a Python script that
+- fetches https://intranet.hbtn.io/status.
 """
-This script fetches the status from a given URL using the requests package
-and displays the response body.
-"""
-
 import requests
 
 
-def fetch_status(url):
-    """
-    Fetches the status to the response body.
-    """
-    response = requests.get(url)
-    body = response.text
-
-    print("Body response:")
-    print("\t- type: {}".format(type(body)))
-    print("\t- content: {}".format(body))
-
-
 if __name__ == "__main__":
-    url = "https://alu-intranet.hbtn.io/status"
-    fetch_status(url)
+    r = requests.get("https://intranet.hbtn.io/status")
+    print("Body response:")
+    print("\t- type: {}".format(type(r.text)))
+    print("\t- content: {}".format(r.text))
