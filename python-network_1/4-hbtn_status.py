@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 """
-This script fetches https://alu-intranet.hbtn.io/status
-using the requests package and displays the response body.
+This script fetches the status from a given URL using the requests package
+and displays the response body.
 """
 
 import requests
+import sys
 
-def fetch_status():
+def fetch_status(url):
     """
-    Fetches the status from https://alu-intranet.hbtn.io/status
-    and prints the type and content of the response body.
+    Fetches the status from the given URL and prints the type and content of the response body.
     """
-    url = "https://alu-intranet.hbtn.io/status"
     response = requests.get(url)
     body = response.text
 
@@ -20,4 +19,5 @@ def fetch_status():
     print("\t- content: {}".format(body))
 
 if __name__ == "__main__":
-    fetch_status()
+    url = sys.argv[1] if len(sys.argv) > 1 else "https://alu-intranet.hbtn.io/status"
+    fetch_status(url)
