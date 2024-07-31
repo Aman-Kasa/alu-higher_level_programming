@@ -5,11 +5,11 @@ and displays the response body.
 """
 
 import requests
-import sys
+
 
 def fetch_status(url):
     """
-    Fetches the status from the given URL and prints the type and content of the response body.
+    Fetches the status to the response body.
     """
     response = requests.get(url)
     body = response.text
@@ -18,6 +18,7 @@ def fetch_status(url):
     print("\t- type: {}".format(type(body)))
     print("\t- content: {}".format(body))
 
+
 if __name__ == "__main__":
-    url = sys.argv[1] if len(sys.argv) > 1 else "https://alu-intranet.hbtn.io/status"
+    url = "https://alu-intranet.hbtn.io/status"
     fetch_status(url)
