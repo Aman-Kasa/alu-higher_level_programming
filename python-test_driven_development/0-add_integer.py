@@ -1,27 +1,25 @@
-#!/usr/bin/python3
-"""_summary_
-This module returns an integer: the addition of a and b
-"""
-
+# 0-add_integer.py
 
 def add_integer(a, b=98):
-    """_summary_
+    """Adds two integers.
 
     Args:
-        a (_type_): _description_
-        b (int, optional): _description_. Defaults to 98.
-
-    Raises:
-        TypeError: __if a is neither an int or float object__
-        TypeError: __if b is neither an int or float object__
+        a (int or float): The first number.
+        b (int or float): The second number, defaults to 98.
 
     Returns:
-        _type_: __The addition of a and b__
+        int: The sum of a and b, cast to an integer if necessary.
+
+    Raises:
+        TypeError: If a or b are not integers or floats.
     """
-
-    if not (isinstance(a, int)) and not (isinstance(a, float)):
+    if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
-    if not (isinstance(b, int)) and not (isinstance(b, float)):
+    if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
-
-    return int(a) + int(b)
+    
+    # Convert both a and b to integers if they are floats
+    a = int(a)
+    b = int(b)
+    
+    return a + b
