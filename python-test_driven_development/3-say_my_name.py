@@ -3,6 +3,7 @@
 This module contains a function that prints a name.
 """
 
+
 def say_my_name(first_name, last_name=""):
     """
     Prints "My name is <first name> <last name>".
@@ -20,7 +21,7 @@ def say_my_name(first_name, last_name=""):
     >>> say_my_name("Walter", "White")
     My name is Walter White
     >>> say_my_name("Bob")
-    My name is Bob 
+    My name is Bob
     >>> try:
     ...     say_my_name(12, "White")
     ... except Exception as e:
@@ -34,11 +35,3 @@ def say_my_name(first_name, last_name=""):
     """
     if not isinstance(first_name, str):
         raise TypeError("first_name must be a string")
-    if not isinstance(last_name, str):
-        raise TypeError("last_name must be a string")
-    
-    print(f"My name is {first_name} {last_name}")
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
