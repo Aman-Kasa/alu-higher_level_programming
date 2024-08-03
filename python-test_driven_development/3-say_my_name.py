@@ -1,30 +1,26 @@
 #!/usr/bin/python3
 """A function that prints the name of a user."""
 
+
 def say_my_name(first_name, last_name=""):
     """
     Function to take in names and print the full name.
-    
     Args:
         first_name (str): This is the first argument, and it must be a string.
-        last_name (str): This is the second argument, and it must be a string. Defaults to an empty string.
-        
+        last_name (str): 2nd Ag, and it must be a string. Defaults empty.
     Raises:
         TypeError: If either first_name or last_name is not a string.
-        
     Returns:
         None
-        
     Prints:
         My name is <first name> <last name>
-    
     Examples:
         >>> say_my_name("John", "Smith")
         My name is John Smith
         >>> say_my_name("Walter", "White")
         My name is Walter White
         >>> say_my_name("Bob")
-        My name is Bob 
+        My name is Bob
         >>> say_my_name(12, "White")
         Traceback (most recent call last):
             ...
@@ -44,6 +40,7 @@ def say_my_name(first_name, last_name=""):
         raise TypeError("last_name must be a string")
 
     print("My name is {} {}".format(first_name, last_name))
+
 
 if __name__ == "__main__":
     import doctest
