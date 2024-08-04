@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-"""
-    A script to test the print_square function.
-"""
-
 print_square = __import__('4-print_square').print_square
 
 print_square(4)
@@ -18,8 +14,18 @@ try:
 except Exception as e:
     print(e)
 print("")
-
 try:
-    print_square(3.5)
+    print_square(4.5)
 except Exception as e:
     print(e)
+print("")
+try:
+    print_square("4")
+except Exception as e:
+    print(e)
+print("")
+try:
+    print_square(-4.5)
+except Exception as e:
+    print(e)
+print("")
