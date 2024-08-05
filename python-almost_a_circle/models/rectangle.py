@@ -1,25 +1,14 @@
-from models.base import Base
-
-
+# In models/rectangle.py
 class Rectangle(Base):
-    def __init__(self, width, height, x=0, y=0, id=None):
-        super().__init__(id)  # Call the Base constructor without parameters if Base doesn't require them
-        self.width = width
-        self.height = height
-        self.x = x
-        self.y = y
-
-    def to_dictionary(self):
-        return {
-            'id': self.id,
-            'width': self.width,
-            'height': self.height,
-            'x': self.x,
-            'y': self.y
-        }
+    def to_csv_list(self):
+        return [self.id, self.width, self.height, self.x, self.y]
 
     @staticmethod
-    def create(**dictionary):
-        dummy = Rectangle(1, 1)
-        dummy.update(**dictionary)
-        return dummy
+    def from_csv_list(csv_list):
+        return {
+            'id': int(csv_list[0]),
+            'width': int(csv_list[1]),
+            'height': int(csv_list[2]),
+            'x': int(csv_list[3]),
+            'y': int(csv_list[4])
+        }

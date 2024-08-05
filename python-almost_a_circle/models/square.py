@@ -1,21 +1,13 @@
-from models.rectangle import Rectangle
-
-
-class Square(Rectangle):
-    def __init__(self, size, x=0, y=0, id=None):
-        super().__init__(size, size, x, y, id)  # Initialize the Rectangle with size for both width and height
-        self.size = size
-
-    def to_dictionary(self):
-        return {
-            'id': self.id,
-            'size': self.size,
-            'x': self.x,
-            'y': self.y
-        }
+# In models/square.py
+class Square(Rectangle):  # Assuming Square inherits Rectangle
+    def to_csv_list(self):
+        return [self.id, self.size, self.x, self.y]
 
     @staticmethod
-    def create(**dictionary):
-        dummy = Square(1)
-        dummy.update(**dictionary)
-        return dummy
+    def from_csv_list(csv_list):
+        return {
+            'id': int(csv_list[0]),
+            'size': int(csv_list[1]),
+            'x': int(csv_list[2]),
+            'y': int(csv_list[3])
+        }
