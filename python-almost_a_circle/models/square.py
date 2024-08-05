@@ -1,19 +1,22 @@
-# models/square.py
+#!/usr/bin/python3
+"""Module defining the Square class."""
+
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """
-    Represents a square that inherits from Rectangle.
-    """
+    """Square class that inherits from Rectangle."""
 
     def __init__(self, size, x=0, y=0, id=None):
-        """Initialize a new Square instance."""
-        super().__init__(size, size, x, y, id)
+        """Initialize a Square instance.
 
-    def __str__(self):
-        """Return the string representation of a Square instance."""
-        return "[Square] ({} {}".format(self.id, self.x, self.y, self.width)
+        Args:
+            size (int): The size of the square.
+            x (int): The x-coordinate of the square.
+            y (int): The y-coordinate of the square.
+            id (int): The ID of the instance.
+        """
+        super().__init__(size, size, x, y, id)
 
     @property
     def size(self):
@@ -25,31 +28,3 @@ class Square(Rectangle):
         """Set the size of the square."""
         self.width = value
         self.height = value
-
-    def update(self, *args, **kwargs):
-        """Update the attributes of the Square instance."""
-        attributes = ["id", "size", "x", "y"]
-        for i, arg in enumerate(args):
-            if i < len(attributes):
-                if attributes[i] == "size":
-                    self.width = self.height = arg
-                else:
-                    setattr(self, attributes[i], arg)
-        for key, value in kwargs.items():
-            if key == "size":
-                self.width = self.height = value
-            elif key in attributes:
-                setattr(self, key, value)
-
-    def to_dictionary(self):
-        """Return the dictionary representation of a Square instance."""
-        return {
-            "id": self.id,
-            "size": self.width,
-            "x": self.x,
-            "y": self.y
-        }
-
-    def to_csv_list(self):
-        """Return the Square attributes as a list for CSV serialization."""
-        return [self.id, self.width, self.x, self.y]
