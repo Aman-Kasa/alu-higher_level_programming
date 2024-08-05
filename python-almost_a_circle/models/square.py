@@ -13,32 +13,40 @@ class Square(Rectangle):
     def __str__(self):
         """Return a string representation of the Square instance"""
         return ("[Square] ({}) {}/{} - {}".format(
-            self.id, self.x, self.y, self.width
+            self.id, self.x, self.y, self.size
         ))
+
+    @property
+    def size(self):
+        """Get the size of the Square"""
+        return self.width
+
+    @size.setter
+    def size(self, value):
+        """Set the size of the Square, validating input"""
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
+        self.width = value
+        self.height = value
 
     def to_dictionary(self):
         """Return the dictionary representation of a Square"""
         return {
             'id': self.id,
-            'size': self.width,  # Square uses width for size
+            'size': self.size,
             'x': self.x,
             'y': self.y
         }
 
     def update(self, *args, **kwargs):
-        """Update the Square instance with argumentrguments"""
+        """Update the Square instance with and/or keyword arguments"""
         if args:
             attrs = ['id', 'size', 'x', 'y']
             for attr, value in zip(attrs, args):
-                if attr == 'size':
-                    setattr(self, 'width', value)
-                    setattr(self, 'height', value)
-                else:
-                    setattr(self, attr, value)
+                setattr(self, attr, value)
         elif kwargs:
             for key, value in kwargs.items():
-                if key == 'size':
-                    setattr(self, 'width', value)
-                    setattr(self, 'height', value)
-                elif hasattr(self, key):
+                if hasattr(self, key):
                     setattr(self, key, value)
