@@ -2,6 +2,7 @@
 """ 4-main """
 from models.rectangle import Rectangle
 
+
 if __name__ == "__main__":
 
     r1 = Rectangle(4, 6)
@@ -9,5 +10,5 @@ if __name__ == "__main__":
 
     print("---")
 
-    r2 = Rectangle(2, 2)
-    r2.display()
+    r1 = Rectangle(2, 2)
+    r1.display()
