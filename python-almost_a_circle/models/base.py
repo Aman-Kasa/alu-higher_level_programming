@@ -17,7 +17,6 @@ class Base:
     This class provides the base functionality for saving and loading
     objects to and from CSV files.
     """
-
     def __init__(self, id=None):
         """
         Initializes a Base instance.
@@ -73,17 +72,20 @@ class Base:
         with open(filename, "r") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
-                if not row or any(not value.strip() for value in row):
-                    continue  # Skip empty rows or rows with invalid data
-                try:
-                    if cls.__name__ == "Rectangle":
-                        instances.append(models.rectangle.Rectangle(
-                            *map(int, row)
-                        ))
-                    elif cls.__name__ == "Square":
-                        instances.append(models.square.Square(
-                            *map(int, row)
-                        ))
-                except ValueError:
-                    print(f"Skipping invalid row: {row}")
+                if row:  # Check if the row is not empty
+                    try:
+                        if cls.__name__ == "Rectangle":
+                            if len(row) == 5:
+                                instances.append(models.rectangle.Rectangle(
+                                    int(row[0]), int(row[1]), int(row[2]),
+                                    int(row[3]), int(row[4])
+                                ))
+                        elif cls.__name__ == "Square":
+                            if len(row) == 4:
+                                instances.append(models.square.Square(
+                                    int(row[0]), int(row[1]), int(row[2]),
+                                    int(row[3])
+                                ))
+                    except ValueError:
+                        print(f"Skipping invalid row: {row}")
         return instances
