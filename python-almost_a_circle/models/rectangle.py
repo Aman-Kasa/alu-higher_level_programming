@@ -1,93 +1,36 @@
-#!/usr/bin/python3
-"""Defines a rectangle class."""
-from models.base import Base
-
-
-class Rectangle(Base):
-    """Represents a rectangle, inheriting from Base."""
+class Rectangle:
+    """Class Rectangle."""
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Initializes a new Rectangle instance."""
-        super().__init__(id)
+        """Initialize a new Rectangle instance."""
         self.width = width
         self.height = height
         self.x = x
         self.y = y
-
-    @property
-    def width(self):
-        return self.__width
-
-    @width.setter
-    def width(self, value):
-        if not isinstance(value, int):
-            raise TypeError("width must be an integer")
-        if value <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = value
-
-    @property
-    def height(self):
-        return self.__height
-
-    @height.setter
-    def height(self, value):
-        if not isinstance(value, int):
-            raise TypeError("height must be an integer")
-        if value <= 0:
-            raise ValueError("height must be > 0")
-        self.__height = value
-
-    @property
-    def x(self):
-        return self.__x
-
-    @x.setter
-    def x(self, value):
-        if not isinstance(value, int):
-            raise TypeError("x must be an integer")
-        if value < 0:
-            raise ValueError("x must be >= 0")
-        self.__x = value
-
-    @property
-    def y(self):
-        return self.__y
-
-    @y.setter
-    def y(self, value):
-        if not isinstance(value, int):
-            raise TypeError("y must be an integer")
-        if value < 0:
-            raise ValueError("y must be >= 0")
-        self.__y = value
-
-    def area(self):
-        """Returns the area value of the Rectangle instance."""
-        return self.width * self.height
-
-    def display(self):
-        """Prints the Rectangle instance with the character #."""
-        print("\n" * self.y, end="")
-        for _ in range(self.height):
-            print(" " * self.x + "#" * self.width)
+        self.id = id
 
     def __str__(self):
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(
-            self.id, self.x, self.y, self.width, self.height)
+        """Return a string representation of the Rectangle instance."""
+        return "[Rect] ({}) {}/{} - {}/{}".format(
+            self.id, self.x, self.y, self.width, self.height
+        )
+
+    def to_dictionary(self):
+        """Return the dictionary representation of a Rectangle."""
+        return {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+        }
 
     def update(self, *args, **kwargs):
-        """Updates attributes of the Rectangle instance.
-
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-        """
-        attributes = ['id', 'width', 'height', 'x', 'y']
+        """Update the Rectangle instance with  arguments."""
         if args:
-            for i, arg in enumerate(args):
-                if i < len(attributes):
-                    setattr(self, attributes[i], arg)
-        else:
+            attrs = ['id', 'width', 'height', 'x', 'y']
+            for attr, value in zip(attrs, args):
+                setattr(self, attr, value)
+        elif kwargs:
             for key, value in kwargs.items():
-                if key in attributes:
+                if hasattr(self, key):
                     setattr(self, key, value)
