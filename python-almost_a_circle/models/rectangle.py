@@ -73,50 +73,39 @@ class Rectangle(Base):
         Validate that the value is an integer greater than or equal to 0.
         """
         if not isinstance(value, int):
-            raise TypeError("x must be an integer")
-        if value < 0:
-            raise ValueError("x must be >= 0")
+            raise TypeError("x must be >= 0")
         self.__x = value
 
     @property
     def y(self):
-        """
-        Get the y coordinate of the rectangle.
-        """
         return self.__y
 
     @y.setter
     def y(self, value):
-        """
-        Set the y coordinate of the rectangle.
-        Validate that the value is an integer greater than or equal to 0.
-        """
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError("y must be an integer")
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
 
     def area(self):
-        """
-        Calculate and return the area of the rectangle.
-        """
+        """Returns the area of the rectangle."""
         return self.width * self.height
 
     def display(self):
-        """
-        Print the rectangle instance with the character #.
-        Account for x and y coordinates.
-        """
-        # Print the y-coordinate offset
+        """Prints the rectangle with the character #."""
         for _ in range(self.y):
             print()
-        # Print each line of the rectangle
         for _ in range(self.height):
             print(" " * self.x + "#" * self.width)
 
     def __str__(self):
-        """
-        Return the string representation of the rectangle.
-        """
+        """Returns a string representation of the rectangle."""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+
+    def update(self, *args):
+        """Updates the attributes of the rectangle."""
+        attributes = ["id", "width", "height", "x", "y"]
+        for index, value in enumerate(args):
+            if index < len(attributes):
+                setattr(self, attributes[index], value)
