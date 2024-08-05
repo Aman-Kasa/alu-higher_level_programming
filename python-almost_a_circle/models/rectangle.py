@@ -78,12 +78,15 @@ class Rectangle(Base):
         return self.width * self.height
 
     def display(self):
-        """Print the rectangle using the character #."""
+        """Print the rectangle using the character #, considering x and y."""
+        # Print y newlines for the vertical offset
+        print("\n" * self.y, end="")
+        # Print the rectangle with x spaces for horizontal offset
         for _ in range(self.height):
-            print("#" * self.width)
+            print(" " * self.x + "#" * self.width)
 
     def __str__(self):
         """Return the string representation of the rectangle."""
-        return ("[Rectangle] ({}) {}/{} - {}/{}".format(
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.x, self.y, self.width, self.height
-        ))
+        )
