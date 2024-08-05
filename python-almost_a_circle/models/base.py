@@ -12,7 +12,7 @@ import os
 class Base:
     """
     Base class for all other classes in this project.
-    Handles id attribute and provides JSON and CSV serializn/deserializn.
+    Handles id attribute and provides JSON and CSV serializaon/deserializn.
     """
 
     __nb_objects = 0
