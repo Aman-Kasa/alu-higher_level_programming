@@ -75,7 +75,11 @@ class Rectangle(Base):
         return self.__width * self.__height
 
     def display(self):
-        """Print the rectangle with the # character"""
+        """Print the rectangle with the # character, considering x and y"""
+        # Print y new lines
+        print("\n" * self.__y, end="")
+
+        # Print each row of the rectangle
         for _ in range(self.__height):
             print(" " * self.__x + "#" * self.__width)
 
@@ -85,7 +89,7 @@ class Rectangle(Base):
             self.id, self.__x, self.__y, self.__width, self.__height)
 
     def update(self, *args, **kwargs):
-        """Update the Rectangle instance with and/or keyword arguments"""
+        """Update the Rectangle insce with argumer keyword arguments"""
         if args:
             attrs = ['id', 'width', 'height', 'x', 'y']
             for attr, value in zip(attrs, args):
