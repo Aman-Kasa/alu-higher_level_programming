@@ -8,17 +8,16 @@ class Rectangle(Base):
         self.x = x
         self.y = y
 
-    def __str__(self):
-        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
-
-    def to_dictionary(self):
-        return {
-            'id': self.id,
-            'width': self.width,
-            'height': self.height,
-            'x': self.x,
-            'y': self.y
-        }
+    def update(self, *args, **kwargs):
+        """Update the attributes of the Rectangle instance."""
+        attributes = ["id", "width", "height", "x", "y"]
+        for i, arg in enumerate(args):
+            if i < len(attributes):
+                setattr(self, attributes[i], arg)
+        for key, value in kwargs.items():
+            if key in attributes:
+                setattr(self, key, value)
 
     def to_csv_list(self):
+        """Return the Rectangle attributes as a list for CSV serialization."""
         return [self.id, self.width, self.height, self.x, self.y]
