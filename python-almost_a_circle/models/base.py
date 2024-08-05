@@ -40,8 +40,7 @@ class Base:
             return
 
         import models.rectangle
-        import models.square
-        
+        import models.square        
         filename = f"{cls.__name__}.csv"
         with open(filename, "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
@@ -68,8 +67,7 @@ class Base:
             return []
 
         import models.rectangle
-        import models.square
-        
+        import models.square        
         instances = []
         with open(filename, "r") as csvfile:
             reader = csv.reader(csvfile)
@@ -87,4 +85,4 @@ class Base:
                         ))
                 except ValueError:
                     print(f"Skipping invalid row: {row}")
-            return instances
+        return instances
