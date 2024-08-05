@@ -9,16 +9,34 @@ class Rectangle(Base):
         self.x = x
         self.y = y
 
-    def update(self, *args, **kwargs):
-        """Update the attributes of the Rectangle instance."""
-        attributes = ["id", "width", "height", "x", "y"]
-        for i, arg in enumerate(args):
-            if i < len(attributes):
-                setattr(self, attributes[i], arg)
-        for key, value in kwargs.items():
-            if key in attributes:
-                setattr(self, key, value)
+    @property
+    def width(self):
+        return self.__width
 
-    def to_csv_list(self):
-        """Return the Rectangle attributes as a list for CSV serialization."""
-        return [self.id, self.width, self.height, self.x, self.y]
+    @width.setter
+    def width(self, value):
+        self.__width = value
+
+    @property
+    def height(self):
+        return self.__height
+
+    @height.setter
+    def height(self, value):
+        self.__height = value
+
+    @property
+    def x(self):
+        return self.__x
+
+    @x.setter
+    def x(self, value):
+        self.__x = value
+
+    @property
+    def y(self):
+        return self.__y
+
+    @y.setter
+    def y(self, value):
+        self.__y = value

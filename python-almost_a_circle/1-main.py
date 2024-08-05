@@ -6,10 +6,10 @@ from models.rectangle import Rectangle
 if __name__ == "__main__":
 
     r1 = Rectangle(10, 2)
-    print(r1.id)
+    print(r1.id)  # Expected output: 1
 
     r2 = Rectangle(2, 10)
-    print(r2.id)
+    print(r2.id)  # Expected output: 2
 
     r3 = Rectangle(10, 2, 0, 0, 12)
-    print(r3.id)
+    print(r3.id)  # Expected output: 12
