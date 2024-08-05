@@ -79,7 +79,7 @@ class Base:
                 if cls.__name__ == "Rectangle":
                     fieldnames = ['id', 'width', 'height', 'x', 'y']
                 elif cls.__name__ == "Square":
-                    fieldnames = ['id', 'size', 'x', 'y']       
+                    fieldnames = ['id', 'size', 'x', 'y']
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
                 for obj in list_objs:
