@@ -5,6 +5,8 @@ Unit tests for models/rectangle.py
 
 import unittest
 from models.rectangle import Rectangle
+from io import StringIO
+from contextlib import redirect_stdout
 
 
 class TestRectangle(unittest.TestCase):
@@ -92,6 +94,26 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r1.area(), 6)
         self.assertEqual(r2.area(), 20)
         self.assertEqual(r3.area(), 56)
+
+    def test_display(self):
+        """
+        Test the display method.
+        """
+        r1 = Rectangle(4, 6)
+        r2 = Rectangle(2, 2)
+        
+        expected_output_1 = "####\n####\n####\n####\n####\n####\n"
+        expected_output_2 = "##\n##\n"
+
+        f = StringIO()
+        with redirect_stdout(f):
+            r1.display()
+        self.assertEqual(f.getvalue(), expected_output_1)
+
+        f = StringIO()
+        with redirect_stdout(f):
+            r2.display()
+        self.assertEqual(f.getvalue(), expected_output_2)
 
 
 if __name__ == '__main__':
