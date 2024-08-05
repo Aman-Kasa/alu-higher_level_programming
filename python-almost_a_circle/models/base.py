@@ -1,15 +1,39 @@
 #!/usr/bin/python3
+"""
+Base class for all models in the project.
+
+This module contains the Base class which provides methods for saving
+and loading objects from CSV files.
+"""
+
 import csv
 import os
 
 
 class Base:
+    """
+    Base class for all models.
+
+    This class provides the base functionality for saving and loading
+    objects to and from CSV files.
+    """
     def __init__(self, id=None):
+        """
+        Initializes a Base instance.
+
+        Args:
+            id (int): The ID of the instance.
+        """
         self.id = id
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """Writes a list of objects to a CSV file."""
+        """
+        Serializes a list of objects to a CSV file.
+
+        Args:
+            list_objs (list): A list of objects to serialize.
+        """
         if not list_objs:
             with open(f"{cls.__name__}.csv", "w", newline="") as csvfile:
                 csv.writer(csvfile).writerow([])
@@ -33,7 +57,12 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        """Reads from a CSV file and returns a list of objects."""
+        """
+        Deserializes objects from a CSV file.
+
+        Returns:
+            list: A list of deserialized objects.
+        """
         filename = f"{cls.__name__}.csv"
         if not os.path.exists(filename):
             return []
