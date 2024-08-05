@@ -5,6 +5,8 @@ Unit tests for models/rectangle.py
 
 import unittest
 from models.rectangle import Rectangle
+from io import StringIO
+from contextlib import redirect_stdout
 
 
 class TestRectangle(unittest.TestCase):
@@ -97,11 +99,11 @@ class TestRectangle(unittest.TestCase):
         """
         Test the display method.
         """
-        r1 = Rectangle(4, 6)
-        r2 = Rectangle(2, 2)
+        r1 = Rectangle(2, 3, 2, 2)
+        r2 = Rectangle(3, 2, 1, 0)
         
-        expected_output_1 = "####\n####\n####\n####\n####\n####\n"
-        expected_output_2 = "##\n##\n"
+        expected_output_1 = "\n\n  ##\n  ##\n  ##\n"
+        expected_output_2 = " ###\n ###\n"
 
         f = StringIO()
         with redirect_stdout(f):

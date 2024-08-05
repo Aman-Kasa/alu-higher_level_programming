@@ -106,9 +106,14 @@ class Rectangle(Base):
     def display(self):
         """
         Print the rectangle instance with the character #.
+        Account for x and y coordinates.
         """
+        # Print the y-coordinate offset
+        for _ in range(self.y):
+            print()
+        # Print each line of the rectangle
         for _ in range(self.height):
-            print("#" * self.width)
+            print(" " * self.x + "#" * self.width)
 
     def __str__(self):
         """
