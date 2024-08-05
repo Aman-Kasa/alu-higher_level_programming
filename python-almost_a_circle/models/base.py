@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import csv
 import os
 
@@ -19,7 +20,6 @@ class Base:
             writer = csv.writer(csvfile)
             for obj in list_objs:
                 if isinstance(obj, Base):
-                    # Import classes inside the method to av imports
                     from models.rectangle import Rectangle
                     from models.square import Square
                     if isinstance(obj, Rectangle):
