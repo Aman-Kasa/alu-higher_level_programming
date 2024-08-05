@@ -1,38 +1,44 @@
 #!/usr/bin/python3
-"""Module that defines the Square class."""
+"""Module defining a Square class"""
 
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Class Square that inherits from Rectangle."""
+    """Class representing a square, inheriting from Rectangle"""
     def __init__(self, size, x=0, y=0, id=None):
-        """Initialize a new Square instance."""
+        """Initialize a new Square instance"""
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """Return a string representation of the Square instance."""
+        """Return a string representation of the Square instance"""
         return ("[Square] ({}) {}/{} - {}".format(
             self.id, self.x, self.y, self.width
         ))
 
-    @property
-    def size(self):
-        """Get the size of the Square."""
-        return self.width
-
-    @size.setter
-    def size(self, value):
-        """Set the size of the Square."""
-        self.width = value
-        self.height = value
+    def to_dictionary(self):
+        """Return the dictionary representation of a Square"""
+        return {
+            'id': self.id,
+            'size': self.width,  # Square uses width for size
+            'x': self.x,
+            'y': self.y
+        }
 
     def update(self, *args, **kwargs):
-        """Update attributes of the Square instance."""
-        if args and len(args) > 0:
-            attr_names = ['id', 'size', 'x', 'y']
-            for attr, val in zip(attr_names, args):
-                setattr(self, attr, val)
+        """Update the Square instance with argumentrguments"""
+        if args:
+            attrs = ['id', 'size', 'x', 'y']
+            for attr, value in zip(attrs, args):
+                if attr == 'size':
+                    setattr(self, 'width', value)
+                    setattr(self, 'height', value)
+                else:
+                    setattr(self, attr, value)
         elif kwargs:
             for key, value in kwargs.items():
-                setattr(self, key, value)
+                if key == 'size':
+                    setattr(self, 'width', value)
+                    setattr(self, 'height', value)
+                elif hasattr(self, key):
+                    setattr(self, key, value)
