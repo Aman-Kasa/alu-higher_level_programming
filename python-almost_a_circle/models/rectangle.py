@@ -6,8 +6,10 @@ from models.base import Base
 
 class Rectangle(Base):
     """A class to define a rectangle."""
+    
     def __init__(self, width, height, x=0, y=0, id=None):
         """Initialize a new Rectangle.
+        
         Args:
             width (int): The width of the rectangle.
             height (int): The height of the rectangle.
@@ -20,7 +22,7 @@ class Rectangle(Base):
         self.height = height
         self.x = x
         self.y = y
-
+    
     @property
     def width(self):
         """Get the width of the rectangle."""
@@ -81,3 +83,7 @@ class Rectangle(Base):
         """Print the rectangle using the character #."""
         for _ in range(self.height):
             print("#" * self.width)
+
+    def __str__(self):
+        """Return the string representation of the rectangle."""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
