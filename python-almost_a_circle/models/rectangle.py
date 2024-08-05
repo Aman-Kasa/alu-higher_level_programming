@@ -1,61 +1,59 @@
-#!/usr/bin/python3
-"""Defines a rectangle class."""
-from models.base import Base
-
-
-class Rectangle(Base):
-    """Represents a rectangle."""
+class Rectangle:
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Initialize a new Rectangle.
-        Args:
-            width (int): The width of the rectangle.
-            height (int): The height of the rectangle.
-            x (int): The x coordinate of the rectangle.
-            y (int): The y coordinate of the rectangle.
-            id (int): The identity of the rectangle.
-        """
-        super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+        self.id = id
 
     @property
     def width(self):
-        """Get the width of the rectangle."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Set the width of the rectangle."""
+        self.__validate_integer("width", value)
+        self.__validate_positive("width", value)
         self.__width = value
 
     @property
     def height(self):
-        """Get the height of the rectangle."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Set the height of the rectangle."""
+        self.__validate_integer("height", value)
+        self.__validate_positive("height", value)
         self.__height = value
 
     @property
     def x(self):
-        """Get the x coordinate of the rectangle."""
         return self.__x
 
     @x.setter
     def x(self, value):
-        """Set the x coordinate of the rectangle."""
+        self.__validate_integer("x", value)
+        self.__validate_non_negative("x", value)
         self.__x = value
 
     @property
     def y(self):
-        """Get the y coordinate of the rectangle."""
         return self.__y
 
     @y.setter
     def y(self, value):
-        """Set the y coordinate of the rectangle."""
+        self.__validate_integer("y", value)
+        self.__validate_non_negative("y", value)
         self.__y = value
+
+    def __validate_integer(self, name, value):
+        if not isinstance(value, int):
+            raise TypeError(f"{name} must be an integer")
+
+    def __validate_positive(self, name, value):
+        if value <= 0:
+            raise ValueError(f"{name} must be > 0")
+
+    def __validate_non_negative(self, name, value):
+        if value < 0:
+            raise ValueError(f"{name} must be >= 0")
