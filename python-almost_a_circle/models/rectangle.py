@@ -1,27 +1,20 @@
-#!/usr/bin/python3
-"""Module defining a Rectangle class"""
-
 from models.base import Base
 
 
 class Rectangle(Base):
-    """Class representing a rectangle, inheriting from Base"""
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Initialize a new Rectangle instance"""
-        super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+        super().__init__(id)
 
     @property
     def width(self):
-        """Get the width"""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Set the width with validation"""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
@@ -30,12 +23,10 @@ class Rectangle(Base):
 
     @property
     def height(self):
-        """Get the height"""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Set the height with validation"""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value <= 0:
@@ -44,12 +35,10 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        """Get the x coordinate"""
         return self.__x
 
     @x.setter
     def x(self, value):
-        """Set the x coordinate with validation"""
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
         if value < 0:
@@ -58,12 +47,10 @@ class Rectangle(Base):
 
     @property
     def y(self):
-        """Get the y coordinate"""
         return self.__y
 
     @y.setter
     def y(self, value):
-        """Set the y coordinate with validation"""
         if not isinstance(value, int):
             raise TypeError("y must be an integer")
         if value < 0:
@@ -71,40 +58,64 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
-        """Return the area of the rectangle"""
         return self.__width * self.__height
 
     def display(self):
-        """Print the rectangle with the # character, considering x and y"""
-        # Print y new lines
-        print("\n" * self.__y, end="")
-
-        # Print each row of the rectangle
+        for _ in range(self.__y):
+            print()
         for _ in range(self.__height):
             print(" " * self.__x + "#" * self.__width)
 
     def __str__(self):
-        """Return a string representation of the rectangle"""
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(
-            self.id, self.__x, self.__y, self.__width, self.__height)
+        return (f"[Rectangle] ({self.id}) "
+                f"{self.__x}/{self.__y} - "
+                f"{self.__width}/{self.__height}")
 
     def update(self, *args, **kwargs):
-        """Update the Rectangle insce with argumer keyword arguments"""
         if args:
-            attrs = ['id', 'width', 'height', 'x', 'y']
-            for attr, value in zip(attrs, args):
-                setattr(self, attr, value)
-        elif kwargs:
+            attributes = ["id", "width", "height", "x", "y"]
+            for i, arg in enumerate(args):
+                setattr(self, attributes[i], arg)
+        else:
             for key, value in kwargs.items():
-                if hasattr(self, key):
-                    setattr(self, key, value)
+                setattr(self, key, value)
 
     def to_dictionary(self):
-        """Return the dictionary representation of a Rectangle"""
         return {
-            'id': self.id,
-            'width': self.__width,
-            'height': self.__height,
-            'x': self.__x,
-            'y': self.__y
+            "id": self.id,
+            "width": self.__width,
+            "height": self.__height,
+            "x": self.__x,
+            "y": self.__y
         }
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        import json
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        import json
+        filename = f"{cls.__name__}.json"
+        with open(filename, "w") as file:
+            if list_objs is None:
+                file.write("[]")
+            else:
+                list_dictionaries = [obj.to_dictionary() for obj in list_objs]
+                file.write(cls.to_json_string(list_dictionaries))
+
+    @staticmethod
+    def from_json_string(json_string):
+        import json
+        if json_string is None or json_string == "":
+            return []
+        return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        dummy = cls(1, 1)
+        dummy.update(**dictionary)
+        return dummy
