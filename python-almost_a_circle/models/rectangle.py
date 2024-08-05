@@ -62,6 +62,7 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
+        """Returns the area value of the Rectangle instance."""
         return self.width * self.height
 
     def display(self):
@@ -75,7 +76,12 @@ class Rectangle(Base):
             self.id, self.x, self.y, self.width, self.height)
 
     def update(self, *args):
-        """Updates attributes of the Rectangle instance."""
+        """Updates attributes of the Rectangle instance.
+
+        Args:
+            *args: A variable number of argumentso attributes in the order:
+                   id, width, height, x, y.
+        """
         attributes = ['id', 'width', 'height', 'x', 'y']
         for i, arg in enumerate(args):
             if i < len(attributes):
