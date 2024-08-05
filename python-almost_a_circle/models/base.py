@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class Base:
@@ -28,12 +29,23 @@ class Base:
         json_string = cls.to_json_string(list_dictionaries)
         with open(filename, "w") as file:
             file.write(json_string)
-
+    
     @classmethod
     def create(cls, **dictionary):
         """Create an instance with all attributes already set"""
-        # Create a dummy instance
         dummy = cls(1, 1)  # Adjust the dummy attributes as needed
-        # Update the dummy instance with real values
         dummy.update(**dictionary)
         return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """Return a list of instances from a JSON file"""
+        filename = f"{cls.__name__}.json"
+        if not os.path.isfile(filename):
+            return []
+        
+        with open(filename, "r") as file:
+            json_string = file.read()
+        
+        list_dictionaries = cls.from_json_string(json_string)
+        return [cls.create(**dictionary) for dictionary in list_dictionaries]
