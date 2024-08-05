@@ -39,21 +39,21 @@ class Base:
                 csv.writer(csvfile).writerow([])
             return
 
+        import models.rectangle
+        import models.square
+        
         filename = f"{cls.__name__}.csv"
         with open(filename, "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             for obj in list_objs:
-                if isinstance(obj, Base):
-                    from models.rectangle import Rectangle
-                    from models.square import Square
-                    if isinstance(obj, Rectangle):
-                        writer.writerow([
-                            obj.id, obj.width, obj.height, obj.x, obj.y
-                        ])
-                    elif isinstance(obj, Square):
-                        writer.writerow([
-                            obj.id, obj.size, obj.x, obj.y
-                        ])
+                if isinstance(obj, models.rectangle.Rectangle):
+                    writer.writerow([
+                        obj.id, obj.width, obj.height, obj.x, obj.y
+                    ])
+                elif isinstance(obj, models.square.Square):
+                    writer.writerow([
+                        obj.id, obj.size, obj.x, obj.y
+                    ])
 
     @classmethod
     def load_from_file_csv(cls):
@@ -67,6 +67,9 @@ class Base:
         if not os.path.exists(filename):
             return []
 
+        import models.rectangle
+        import models.square
+        
         instances = []
         with open(filename, "r") as csvfile:
             reader = csv.reader(csvfile)
@@ -75,13 +78,11 @@ class Base:
                     continue  # Skip empty rows or rows with invalid data
                 try:
                     if cls.__name__ == "Rectangle":
-                        from models.rectangle import Rectangle
-                        instances.append(Rectangle(
+                        instances.append(models.rectangle.Rectangle(
                             *map(int, row)
                         ))
                     elif cls.__name__ == "Square":
-                        from models.square import Square
-                        instances.append(Square(
+                        instances.append(models.square.Square(
                             *map(int, row)
                         ))
                 except ValueError:
