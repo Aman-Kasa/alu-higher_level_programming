@@ -32,7 +32,12 @@ class Rectangle(Base):
     def width(self, value):
         """
         Set the width of the rectangle.
+        Validate that the value is an integer greater than 0.
         """
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
         self.__width = value
 
     @property
@@ -46,7 +51,12 @@ class Rectangle(Base):
     def height(self, value):
         """
         Set the height of the rectangle.
+        Validate that the value is an integer greater than 0.
         """
+        if not isinstance(value, int):
+            raise TypeError("height must be an integer")
+        if value <= 0:
+            raise ValueError("height must be > 0")
         self.__height = value
 
     @property
@@ -60,7 +70,12 @@ class Rectangle(Base):
     def x(self, value):
         """
         Set the x coordinate of the rectangle.
+        Validate that the value is an integer greater than or equal to 0.
         """
+        if not isinstance(value, int):
+            raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
         self.__x = value
 
     @property
@@ -74,5 +89,10 @@ class Rectangle(Base):
     def y(self, value):
         """
         Set the y coordinate of the rectangle.
+        Validate that the value is an integer greater than or equal to 0.
         """
+        if not isinstance(value, int):
+            raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
         self.__y = value
