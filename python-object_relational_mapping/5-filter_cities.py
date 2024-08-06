@@ -14,8 +14,8 @@ def main():
               "<database name> <state name>")
         return
 
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
+    mysql_user = sys.argv[1]
+    mysql_pass = sys.argv[2]
     db_name = sys.argv[3]
     state_name = sys.argv[4]
 
@@ -23,13 +23,12 @@ def main():
         db = MySQLdb.connect(
             host="localhost",
             port=3306,
-            user=mysql_username,
-            passwd=mysql_password,
+            user=mysql_user,
+            passwd=mysql_pass,
             db=db_name
         )
-
         cursor = db.cursor()
-
+        
         query = (
             "SELECT cities.name FROM cities "
             "JOIN states ON cities.state_id = states.id "
@@ -37,18 +36,17 @@ def main():
             "ORDER BY cities.id ASC"
         )
         cursor.execute(query, (state_name,))
-        results = cursor.fetchall()
-
-        if results:
-            print(", ".join(city[0] for city in results))
+        rows = cursor.fetchall()
+        
+        if rows:
+            print(", ".join(row[0] for row in rows))
         else:
             print()
 
         cursor.close()
         db.close()
-    except MySQLdb.Error as err:
-        print(f"Error: {err}")
-        sys.exit(1)
+    except MySQLdb.Error as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
