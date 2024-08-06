@@ -9,26 +9,41 @@ import sys
 
 def main():
     if len(sys.argv) != 4:
-        msg = ("Usage: ./1-filter_states.py <mysql_username> "
-               "<mysql_password> <database_name>")
-        print(msg)
+        print("Usage: ./1-filter_states.py <mysql_username> <mysql_password>"
+              " <database_name>")
         sys.exit(1)
 
-    user, passwd, dbname = sys.argv[1], sys.argv[2], sys.argv[3]
+    user = sys.argv[1]
+    passwd = sys.argv[2]
+    dbname = sys.argv[3]
 
     try:
+        # Connect to the MySQL database
         db = MySQLdb.connect(
-            host="localhost", port=3306, user=user,
-            passwd=passwd, db=dbname
+            host="localhost",
+            port=3306,
+            user=user,
+            passwd=passwd,
+            db=dbname
         )
+
+        # Create a cursor object
         cur = db.cursor()
+
+        # Execute SQL query to retrieve states starting with 'N'
         cur.execute(
-            "SELECT id, name FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+            "SELECT id, name FROM states WHERE name LIKE 'N%' "
+            "ORDER BY id ASC"
         )
+
+        # Fetch and print results
         for row in cur.fetchall():
             print(row)
+
+        # Close cursor and database connection
         cur.close()
         db.close()
+        
     except MySQLdb.Error as e:
         print(f"Error: {e}")
         sys.exit(1)
