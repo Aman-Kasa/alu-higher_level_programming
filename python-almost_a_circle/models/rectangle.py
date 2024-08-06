@@ -2,11 +2,16 @@ from models.base import Base
 
 
 class Rectangle(Base):
+    """Rectangle class that inherits from Base"""
     def __init__(self, width, height, x=0, y=0, id=None):
+        """Initialize a new Rectangle instance"""
         super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
 
-    # Add other methods if needed
+    def __str__(self):
+        """Return the string representation of the Rectangle"""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.x, self.y, self.width, self.height)

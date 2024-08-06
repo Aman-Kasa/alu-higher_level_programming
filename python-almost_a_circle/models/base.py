@@ -1,91 +1,52 @@
-#!/usr/bin/python3
-"""
-Base class for all models in the project.
-
-This module contains the Base class which provides methods for saving
-and loading objects from CSV files.
-"""
-
 import csv
 import os
 
 
 class Base:
-    """
-    Base class for all models.
+    """Base class for all other classes in this project"""
 
-    This class provides the base functionality for saving and loading
-    objects to and from CSV files.
-    """
+    __nb_objects = 0
+
     def __init__(self, id=None):
-        """
-        Initializes a Base instance.
-
-        Args:
-            id (int): The ID of the instance.
-        """
-        self.id = id
+        """Initialize a new Base instance"""
+        if id is not None:
+            self.id = id
+        else:
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """
-        Serializes a list of objects to a CSV file.
-
-        Args:
-            list_objs (list): A list of objects to serialize.
-        """
-        if not list_objs:
-            with open(f"{cls.__name__}.csv", "w", newline="") as csvfile:
-                csv.writer(csvfile).writerow([])
-            return
-
-        import models.rectangle
-        import models.square
+        """Saves list of objects to a CSV file"""
         filename = f"{cls.__name__}.csv"
-        with open(filename, "w", newline="") as csvfile:
+        with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            for obj in list_objs:
-                if isinstance(obj, models.rectangle.Rectangle):
-                    writer.writerow([
-                        obj.id, obj.width, obj.height, obj.x, obj.y
-                    ])
-                elif isinstance(obj, models.square.Square):
-                    writer.writerow([
-                        obj.id, obj.size, obj.x, obj.y
-                    ])
+            if cls.__name__ == "Rectangle":
+                for obj in list_objs:
+                    writer.writerow(
+                        [obj.id, obj.width, obj.height, obj.x, obj.y]
+                    )
+            elif cls.__name__ == "Square":
+                for obj in list_objs:
+                    writer.writerow(
+                        [obj.id, obj.size, obj.x, obj.y]
+                    )
 
     @classmethod
     def load_from_file_csv(cls):
-        """
-        Deserializes objects from a CSV file.
-
-        Returns:
-            list: A list of deserialized objects.
-        """
+        """Loads list of objects from a CSV file"""
         filename = f"{cls.__name__}.csv"
         if not os.path.exists(filename):
             return []
-
-        import models.rectangle
-        import models.square
-        instances = []
-        with open(filename, "r") as csvfile:
+        with open(filename, 'r', newline='') as csvfile:
             reader = csv.reader(csvfile)
+            list_objs = []
             for row in reader:
-                if row:  # Check if the row is not empty
-                    try:
-                        if cls.__name__ == "Rectangle":
-                            if len(row) == 5:
-                                instances.append(models.rectangle.Rectangle(
-                                    int(row[0]), int(row[1]), int(row[2]),
-                                    int(row[3]), int(row[4])
-                                ))
-                        elif cls.__name__ == "Square":
-                            if len(row) == 4:
-                                instances.append(models.square.Square(
-                                    int(row[0]), int(row[1]), int(row[2]),
-                                    int(row[3])
-                                ))
-                    except ValueError:
-                        print(f"Skipping invalid row: {row}")
-        return instances
+                if cls.__name__ == "Rectangle":
+                    id, width, height, x, y = map(int, row)
+                    obj = cls(width, height, x, y, id)
+                elif cls.__name__ == "Square":
+                    id, size, x, y = map(int, row)
+                    obj = cls(size, x, y, id)
+                list_objs.append(obj)
+            return list_objs
