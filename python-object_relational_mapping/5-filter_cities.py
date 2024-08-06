@@ -29,7 +29,6 @@ if __name__ == "__main__":
 
     cursor = db.cursor()
 
-    # Use a single execute() call with JOIN to get all the necessary data
     query = (
         "SELECT cities.name FROM cities "
         "JOIN states ON cities.state_id = states.id "
@@ -39,9 +38,8 @@ if __name__ == "__main__":
     cursor.execute(query, (state_name,))
     results = cursor.fetchall()
 
-    # Print cities in a comma-separated format
     if results:
-        print(", ".join(row[0] for row in results))
+        print(", ".join(city[0] for city in results))
     else:
         print()
 
