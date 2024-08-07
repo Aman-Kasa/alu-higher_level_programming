@@ -1,4 +1,3 @@
-# python-almost_a_circle/models/rectangle.py
 #!/usr/bin/python3
 """ Rectangle class that inherits from Base """
 
