@@ -2,26 +2,29 @@
 import json
 
 """
-This module provides a base class for other classes in the project.
+This module provides a base class for managing object IDs and JSON serialization.
 
-It includes functionality for managing object IDs and JSON serialization.
+It includes the Base class with a static method for converting a list of dictionaries
+to a JSON string.
 """
 
 
 class Base:
-    """A base class for other classes in the project.
+    """
+    Base class for other classes in the project.
 
-    This class manages the ID attribute and provides utility methods
-    for JSON serialization.
+    Attributes:
+        __nb_objects (int): The number of objects instantiated.
     """
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Initialize a new Base instance.
+        """
+        Initialize a new Base instance.
 
         Args:
-            id (int): The ID to set for the instance. If None, a new ID
-                      will be automatically assigned.
+            id (int, optional): The ID to  to the instance. If None, a new ID
+                                will be automatically assigned.
         """
         if id is not None:
             self.id = id
@@ -31,15 +34,15 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Convert a list of dictionaries to a JSON string.
+        """
+        Convert a list of dictionaries to a JSON string.
 
         Args:
-            list_dictionaries (list of dict): The list of dictionaries to
-                                              serialize to JSON.
+            list_dictionaries (list of dict): The list of dictionaries to convert.
 
         Returns:
             str: The JSON string representation of the list of dictionaries.
-                 If list_dictionaries is None or empty, returns "[]".
+                 Returns "[]" if list_dictionaries is None or empty.
         """
         if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
