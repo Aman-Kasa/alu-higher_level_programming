@@ -2,10 +2,12 @@
 import json
 
 """
-This module provides a base class for managing object IDs and JSON serialization.
+This module provides a base class for managing object IDs and JSON
+serialization.
 
-It includes the Base class with a static method for converting a list of dictionaries
-to a JSON string.
+It includes:
+- Base class for managing IDs.
+- Static method for converting a list of dictionaries to a JSON string.
 """
 
 
@@ -23,8 +25,8 @@ class Base:
         Initialize a new Base instance.
 
         Args:
-            id (int, optional): The ID to  to the instance. If None, a new ID
-                                will be automatically assigned.
+            id (int, optional): The ID to assign to the instance. If None,
+                                a new ID will be automatically assigned.
         """
         if id is not None:
             self.id = id
@@ -38,7 +40,8 @@ class Base:
         Convert a list of dictionaries to a JSON string.
 
         Args:
-            list_dictionaries (list of dict): The list of dictionaries to convert.
+            list_dictionaries (list of dict): The list of dictionaries to
+                                              convert.
 
         Returns:
             str: The JSON string representation of the list of dictionaries.
