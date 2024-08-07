@@ -1,11 +1,17 @@
 #!/usr/bin/python3
 import json
 
+"""
+This module provides a base class for other classes in the project.
+
+It includes functionality for managing object IDs and JSON serialization.
+"""
+
 
 class Base:
     """A base class for other classes in the project.
 
-    This class manages id attribute and provides utility methods
+    This class manages the ID attribute and provides utility methods
     for JSON serialization.
     """
     __nb_objects = 0
@@ -14,7 +20,7 @@ class Base:
         """Initialize a new Base instance.
 
         Args:
-            id (int): The id to set for the instance. If None, a new id
+            id (int): The ID to set for the instance. If None, a new ID
                       will be automatically assigned.
         """
         if id is not None:
