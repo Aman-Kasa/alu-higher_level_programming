@@ -4,7 +4,7 @@ from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ Class representing a Square, inheriting from Rectangle """
+    """ Class representing a Square, inheriting from Rectangle """    
     def __init__(self, size, x=0, y=0, id=None):
         """ Initializes the Square """
         super().__init__(size, size, x, y, id)
@@ -21,6 +21,6 @@ class Square(Rectangle):
 
     @size.setter
     def size(self, value):
-        """ Setter for size, updating width and height """
+        """ Setter for size, updating width and height with validation """
         self.width = value
         self.height = value
