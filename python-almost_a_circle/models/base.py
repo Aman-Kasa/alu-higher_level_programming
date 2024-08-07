@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-""" Module containing the Base class """
+""" Module that contains the Base class """
 import json
 
 
 class Base:
-    """ Base class for all other classes """
+    """ Base class for other classes """
     def __init__(self, id=None):
-        """ Initialize the Base class with an id """
-        self.id = id
+        """ Initializes the Base class """
+        self.id = id  # Ensure id is set here
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """ Convert a list of dictionaries to a JSON string """
-        if list_dictionaries is None or not list_dictionaries:
+        """ Returns the JSON string representation of list_dictionaries """
+        if list_dictionaries is None or len(list_dictionaries) == 0:
             return "[]"
         return json.dumps(list_dictionaries)
