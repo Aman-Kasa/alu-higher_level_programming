@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Base class module """
 
+
 class Base:
     """ Base class to manage id attribute """
 
