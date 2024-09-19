@@ -4,7 +4,7 @@
 const n = parseInt(process.argv[2]);
 
 // Recursive function to calculate factorial
-function factorial(n) {
+function factorial (n) {
   if (isNaN(n) || n === 0) {
     return 1;
   }
