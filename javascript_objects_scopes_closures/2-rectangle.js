@@ -2,12 +2,12 @@
 
 class Rectangle {
   constructor (w, h) {
-    // Initialize width and height only if w and h are positive integers
-    if (Number.isInteger(w) && Number.isInteger(h) && w > 0 && h > 0) {
+    // Check if w and h are positive integers
+    if (Number.isInteger(w) && w > 0 && Number.isInteger(h) && h > 0) {
       this.width = w;
       this.height = h;
     } else {
-      // Set width and height to undefined if invalid input
+      // Initialize with default values if conditions are not met
       this.width = undefined;
       this.height = undefined;
     }
