@@ -6,7 +6,7 @@ const a = parseInt(args[2]);
 const b = parseInt(args[3]);
 
 // Function that adds two integers
-function add(a, b) {
+function add (a, b) {
   return a + b;
 }
 
