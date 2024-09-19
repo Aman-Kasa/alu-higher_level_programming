@@ -3,7 +3,7 @@
 const Rectangle = require('./5-square');
 
 class Square extends Rectangle {
-  constructor(size) {
+  constructor (size) {
     super(size, size);
   }
 
