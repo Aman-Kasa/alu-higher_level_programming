@@ -7,7 +7,7 @@ console.log(myObject);
 
 // Add an incr function to myObject
 myObject.incr = function () {
-  this.value++;  // Increment the value property of myObject
+  this.value++; // Increment the value property of myObject
 };
 
 myObject.incr();
