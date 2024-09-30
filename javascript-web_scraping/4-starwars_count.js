@@ -20,6 +20,7 @@ request(apiUrl, (error, response, body) => {
 
   // Loop through each film and check for Wedge Antilles
   films.forEach((film) => {
+    // Check if Wedge Antilles is in the film's characters
     if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${wedgeAntillesID}/`)) {
       count++;
     }
