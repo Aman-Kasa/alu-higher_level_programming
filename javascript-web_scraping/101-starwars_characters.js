@@ -1,48 +1,40 @@
 #!/usr/bin/node
 const request = require('request');
 
-// Get the movie ID from the command line arguments
-const movieId = process.argv[2];
+// Function to fetch characters from a Star Wars movie
+const fetchCharacters = (movieId) => {
+  const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-// Construct the API URL for the specific movie
-const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+  // Request to get the movie data
+  request(apiUrl, (error, response, body) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-// Send a GET request to the API to retrieve movie details
-request(apiUrl, (error, response, body) => {
-  if (error) {
-    console.error(error); // Print the error if one occurred
-    return;
-  }
+    const movieData = JSON.parse(body);
+    if (!movieData.title) {
+      console.log('Movie not found.');
+      return;
+    }
 
-  // Parse the response body to get movie data
-  const movieData = JSON.parse(body);
+    const characters = movieData.characters;
 
-  // Check if the movie was found
-  if (movieData.title) {
-    // Create an array to store character names
-    const characterNames = [];
-    
-    // Loop through the characters array
-    movieData.characters.forEach(characterUrl => {
-      // For each character URL, make a request to get character details
+    // Fetch character names in the order they are listed
+    characters.forEach(characterUrl => {
       request(characterUrl, (charError, charResponse, charBody) => {
         if (charError) {
-          console.error(charError); // Print the error if one occurred
+          console.error(charError);
           return;
         }
 
-        // Parse character data
         const characterData = JSON.parse(charBody);
-        // Push the character name to the array
-        characterNames.push(characterData.name);
-
-        // If all characters have been retrieved, print the names
-        if (characterNames.length === movieData.characters.length) {
-          characterNames.forEach(name => console.log(name));
-        }
+        console.log(characterData.name);
       });
     });
-  } else {
-    console.log('Movie not found.'); // Handle case where movie ID is invalid
-  }
-});
+  });
+};
+
+// Get the movie ID from command line arguments and call the function
+const movieId = process.argv[2];
+fetchCharacters(movieId);
