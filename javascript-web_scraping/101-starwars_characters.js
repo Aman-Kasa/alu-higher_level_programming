@@ -33,6 +33,8 @@ request(filmUrl, (error, response, body) => {
 
   // Function to fetch character names
   const fetchCharacterNames = (urls) => {
+    let characterCount = 0;
+    
     urls.forEach((url) => {
       request(url, (err, res, characterBody) => {
         if (err) {
@@ -42,10 +44,8 @@ request(filmUrl, (error, response, body) => {
         
         const characterData = JSON.parse(characterBody);
         console.log(characterData.name);
-      });
-    });
-  };
+        characterCount++;
 
-  // Fetch character names in the order they are listed
-  fetchCharacterNames(characterUrls);
-});
+        // Check if this was the last character to fetch
+        if (characterCount === urls.length) {
+          console.log('OK
