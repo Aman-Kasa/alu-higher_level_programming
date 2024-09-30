@@ -9,16 +9,21 @@ request(apiUrl, (error, response, body) => {
   if (error) {
     console.log(error); // Print the error if any
   } else {
-    const films = JSON.parse(body).results; // Parse the JSON response
-    const wedgeId = '18';
-    let count = 0;
+    try {
+      const films = JSON.parse(body).results; // Parse the JSON response
+      const wedgeId = '18';
+      let count = 0;
 
-    // Loop through each film and check if Wedge Antilles (ID 18) is present
-    for (const film of films) {
-      if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${wedgeId}/`)) {
-        count++;
+      // Loop through each film and check if Wedge Antilles (ID 18) is present
+      for (const film of films) {
+        if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${wedgeId}/`)) {
+          count++;
+        }
       }
+
+      console.log(count); // Print the count of movies Wedge Antilles appears in
+    } catch (parseError) {
+      console.log('Invalid JSON received from server');
     }
-    console.log(count); // Print the count of movies Wedge Antilles appears in
   }
 });
