@@ -1,4 +1,5 @@
 #!/usr/bin/node
+
 const request = require('request');
 
 // Get the Movie ID from command line arguments
@@ -21,7 +22,7 @@ request(filmUrl, (error, response, body) => {
   }
 
   const filmData = JSON.parse(body);
-  
+
   // Check if the film exists
   if (!filmData.title) {
     console.error('Film not found');
@@ -31,27 +32,29 @@ request(filmUrl, (error, response, body) => {
   // Extract character URLs
   const characterUrls = filmData.characters;
 
-  // Function to fetch character names
+  // Function to fetch character names in order
   const fetchCharacterNames = (urls) => {
-    let characterCount = 0;
-    
-    urls.forEach((url) => {
-      request(url, (err, res, characterBody) => {
-        if (err) {
-          console.error('Error fetching character:', err);
-          return;
-        }
-        
-        const characterData = JSON.parse(characterBody);
-        console.log(characterData.name);
-        characterCount++;
+    let characterPromises = urls.map((url) => {
+      return new Promise((resolve, reject) => {
+        request(url, (err, res, characterBody) => {
+          if (err) {
+            reject('Error fetching character:', err);
+            return;
+          }
 
-        // Check if this was the last character to fetch
-        if (characterCount === urls.length) {
-          console.log('OK');
-        }
+          const characterData = JSON.parse(characterBody);
+          resolve(characterData.name);
+        });
       });
     });
+
+    Promise.all(characterPromises)
+      .then((characterNames) => {
+        characterNames.forEach(name => console.log(name));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   // Fetch character names in the order they are listed
