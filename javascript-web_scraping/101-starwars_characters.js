@@ -1,40 +1,51 @@
 #!/usr/bin/node
 const request = require('request');
 
-// Function to fetch characters from a Star Wars movie
-const fetchCharacters = (movieId) => {
-  const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+// Get the Movie ID from command line arguments
+const movieId = process.argv[2];
 
-  // Request to get the movie data
-  request(apiUrl, (error, response, body) => {
-    if (error) {
-      console.error(error);
-      return;
-    }
+// Validate Movie ID
+if (!movieId) {
+  console.error('Missing Movie ID');
+  process.exit(1);
+}
 
-    const movieData = JSON.parse(body);
-    if (!movieData.title) {
-      console.log('Movie not found.');
-      return;
-    }
+// API URL for the specified movie
+const filmUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
 
-    const characters = movieData.characters;
+// Fetch the movie data
+request(filmUrl, (error, response, body) => {
+  if (error) {
+    console.error('Error fetching film:', error);
+    return;
+  }
 
-    // Fetch character names in the order they are listed
-    characters.forEach(characterUrl => {
-      request(characterUrl, (charError, charResponse, charBody) => {
-        if (charError) {
-          console.error(charError);
+  const filmData = JSON.parse(body);
+  
+  // Check if the film exists
+  if (!filmData.title) {
+    console.error('Film not found');
+    return;
+  }
+
+  // Extract character URLs
+  const characterUrls = filmData.characters;
+
+  // Function to fetch character names
+  const fetchCharacterNames = (urls) => {
+    urls.forEach((url) => {
+      request(url, (err, res, characterBody) => {
+        if (err) {
+          console.error('Error fetching character:', err);
           return;
         }
-
-        const characterData = JSON.parse(charBody);
+        
+        const characterData = JSON.parse(characterBody);
         console.log(characterData.name);
       });
     });
-  });
-};
+  };
 
-// Get the movie ID from command line arguments and call the function
-const movieId = process.argv[2];
-fetchCharacters(movieId);
+  // Fetch character names in the order they are listed
+  fetchCharacterNames(characterUrls);
+});
