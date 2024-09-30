@@ -34,11 +34,11 @@ request(filmUrl, (error, response, body) => {
 
   // Function to fetch character names in order
   const fetchCharacterNames = (urls) => {
-    let characterPromises = urls.map((url) => {
+    const characterPromises = urls.map((url) => {
       return new Promise((resolve, reject) => {
         request(url, (err, res, characterBody) => {
           if (err) {
-            reject('Error fetching character:', err);
+            reject(new Error('Error fetching character: ' + err));
             return;
           }
 
