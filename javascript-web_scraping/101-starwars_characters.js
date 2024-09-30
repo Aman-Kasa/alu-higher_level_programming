@@ -48,4 +48,12 @@ request(filmUrl, (error, response, body) => {
 
         // Check if this was the last character to fetch
         if (characterCount === urls.length) {
-          console.log('OK
+          console.log('OK');
+        }
+      });
+    });
+  };
+
+  // Fetch character names in the order they are listed
+  fetchCharacterNames(characterUrls);
+});
